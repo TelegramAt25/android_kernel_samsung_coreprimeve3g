@@ -468,8 +468,7 @@ struct request_queue {
 #define QUEUE_FLAG_SAME_FORCE  18	/* force complete on same CPU */
 #define QUEUE_FLAG_DEAD        19	/* queue tear-down finished */
 
-#define QUEUE_FLAG_DEFAULT	((1 << QUEUE_FLAG_STACKABLE)	|	\
-				 (1 << QUEUE_FLAG_ADD_RANDOM))
+#define QUEUE_FLAG_DEFAULT	((1 << QUEUE_FLAG_STACKABLE))
 
 static inline void queue_lockdep_assert_held(struct request_queue *q)
 {
