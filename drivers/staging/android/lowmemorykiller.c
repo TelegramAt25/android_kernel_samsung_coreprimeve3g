@@ -77,7 +77,7 @@ static uint32_t oom_count = 0;
 #define _ZONE ZONE_NORMAL
 #endif
 
-static uint32_t lowmem_debug_level = 1;
+static uint32_t lowmem_debug_level = 0;
 static int lowmem_adj[6] = {
 	0,
 	1,
