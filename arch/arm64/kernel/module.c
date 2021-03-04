@@ -30,6 +30,7 @@
 #define	AARCH64_INSN_IMM_MOVNZ		AARCH64_INSN_IMM_MAX
 #define	AARCH64_INSN_IMM_MOVK		AARCH64_INSN_IMM_16
 
+#if defined(CONFIG_MODULES) || defined(CONFIG_BPF_JIT)
 void *module_alloc(unsigned long size)
 {
 	return __vmalloc_node_range(size, 1, MODULES_VADDR, MODULES_END,
@@ -37,6 +38,13 @@ void *module_alloc(unsigned long size)
 				    __builtin_return_address(0));
 }
 
+void module_memfree(void *module_region)
+{
+	vfree(module_region);
+}
+#endif /* CONFIG_MODULES || CONFIG_BPF_JIT */
+
+#ifdef CONFIG_MODULES
 enum aarch64_reloc_op {
 	RELOC_OP_NONE,
 	RELOC_OP_ABS,
@@ -394,3 +402,4 @@ overflow:
 	       me->name, (int)ELF64_R_TYPE(rel[i].r_info), val);
 	return -ENOEXEC;
 }
+#endif /* CONFIG_MODULES */
