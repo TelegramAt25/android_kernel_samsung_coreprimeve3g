@@ -248,4 +248,5 @@ int walk_page_range(unsigned long addr, unsigned long end,
 	} while (addr = next, addr < end);
 
 	return err;
+
 }
