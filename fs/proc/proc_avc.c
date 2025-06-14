@@ -13,6 +13,7 @@
 #include <linux/syslog.h>
 #include <linux/bootmem.h>
 #include <linux/export.h>
+#include <linux/gfp.h>
 
 #include <asm/uaccess.h>
 #include <asm/io.h>
