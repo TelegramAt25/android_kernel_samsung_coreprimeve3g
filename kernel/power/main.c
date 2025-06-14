@@ -715,19 +715,24 @@ power_attr(pm_freeze_timeout);
 #endif	/* CONFIG_FREEZER*/
 
 #ifdef CONFIG_ARCH_SC
+#ifdef CONFIG_SEC_LOG
 extern void cp_abort(void *debug_info);
+#endif
 static ssize_t restart_cpc_show(struct kobject *kobj, struct kobj_attribute *attr,
                           char *buf)
 {
                 return -EINVAL;
 }
 
+#ifdef CONFIG_SEC_LOG
 extern int sec_log_buf_nocache_enable;
+#endif
 #define CP_DBG_ADD 0x86bfff00	//physical address
 #define CP_DBG_LEN 256
 static ssize_t restart_cpc_store(struct kobject *kobj, struct kobj_attribute *attr,
                           const char *buf, size_t n)
 {
+#ifdef CONFIG_SEC_LOG
 	int val;
 	char *cp_assert_info[1]={0};
 #ifdef CONFIG_SEC_LOG_BUF_NOCACHE
@@ -753,6 +758,9 @@ static ssize_t restart_cpc_store(struct kobject *kobj, struct kobj_attribute *at
 	}
 
 	return n;
+#else
+	return 0;
+#endif
 }
 
 power_attr(restart_cpc);
